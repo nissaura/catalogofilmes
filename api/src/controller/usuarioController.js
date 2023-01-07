@@ -14,7 +14,7 @@ server.post('/usuario/login', async (req, resp) => {
         resp.send(resposta)
 
     }catch (err){
-        resp.status(401).send({
+        resp.send(401).send({
             erro: err.massage
         });
 
