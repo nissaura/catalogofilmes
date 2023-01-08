@@ -11,8 +11,10 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-//configuração dos endpoints
+// liberar aquivos da storage
+server.use('/storage/capasfilmes', express.static('storage/capasfilmes'));
 
+//configuração dos endpoints
 server.use(usuarioController);
 server.use(filmeController);
 
