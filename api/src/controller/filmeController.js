@@ -1,4 +1,4 @@
-import { inserirFilme, alterarImagem } from '../repository/filmeRepository.js'
+import { inserirFilme, alterarImagem, listarTodosFilmes } from '../repository/filmeRepository.js'
    
 import multer from 'multer'
 
@@ -47,6 +47,21 @@ server.put('/filme/:id/imagem', upload.single('capa'),  async (req, resp) => {
         })
     }
 })
+
+server.get('/filme', async (req, resp) => {
+    try{
+        const resposta = await listarTodosFilmes();
+        resp.send(resposta);
+
+    }catch(err){
+        resp.status(400).send({
+            erro: err.massage
+        })
+    }
+})
+
+
+
 
 
 export default server;
