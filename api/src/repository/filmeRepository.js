@@ -55,13 +55,26 @@ export async function listarFilmeId(id){
     `SELECT id_filme		 id,
             nm_filme	     nome,
             vl_avaliacao	avaliacao,
-            ds_sinopse		sinopse,
             dt_lancamento	lancamento,
-            bt_disponivel	disponivel,
-            img_filme         capa
+            bt_disponivel	disponivel
         FROM tb_filme
         WHERE id_filme			= ? `
 
         const [ linhas ] = await con.query(comando, [id]);
-        return linhas;
+        return linhas[0];
 }
+
+export async function listarFilmeNome(nome){
+
+    const comando = 
+    `SELECT id_filme			id,
+            nm_filme			nome,
+            vl_avaliacao		avaliacao,
+            dt_lancamento	lancamento,
+            bt_disponivel	disponivel
+        FROM tb_filme
+        WHERE nm_filme		like ? `
+
+    const [ linhas ] = await con.query(comando , [ `%${nome}%`]);
+    return linhas [0];
+} 

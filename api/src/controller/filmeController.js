@@ -1,4 +1,4 @@
-import { inserirFilme, alterarImagem, listarTodosFilmes, deletarFilme, listarFilmeId } from '../repository/filmeRepository.js'
+import { inserirFilme, alterarImagem, listarTodosFilmes, deletarFilme, listarFilmeId, listarFilmeNome } from '../repository/filmeRepository.js'
    
 import multer from 'multer'
 
@@ -79,13 +79,28 @@ server.delete('/filme/:id', async (req, resp) => {
 server.get('/filme/:id', async (req, resp) => {
     try{
 
-        const {id } = req.body;
+        const {id } = req.params;
 
         const resposta = await listarFilmeId(id);
         resp.send(resposta);
     }catch(err){
-        resp.status(200).send({
+        resp.status(400).send({
             erro: err.message
+        })
+    }
+})
+
+server.get('/filme/busca', async (req, resp) => {
+    try{
+
+        const { nome } = req.query;
+
+        const resposta = await listarFilmeNome(nome);
+        resp.send(resposta);
+
+    }catch(err){
+        resp.status(400).send({
+            erro: err.massage
         })
     }
 })
