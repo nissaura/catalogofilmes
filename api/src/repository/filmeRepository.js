@@ -46,7 +46,7 @@ export async function deletarFilme(id) {
             WHERE id_filme = ? `
 
     const [ resposta ] = await con.query(comando, [ id]);
-    return resposta;
+    return resposta.affectedRows;
 }
 
 export async function listarFilmeId(id){

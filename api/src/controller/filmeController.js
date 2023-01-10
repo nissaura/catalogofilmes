@@ -63,7 +63,7 @@ server.get('/filme', async (req, resp) => {
 
 server.delete('/filme/:id', async (req, resp) => {
     try{
-        const { id } = req.body;
+        const { id } = req.params;
 
         const resposta = await  deletarFilme(id);
         resp.send(resposta);
